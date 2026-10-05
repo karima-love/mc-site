@@ -1,0 +1,408 @@
+:root {
+    --baby-blue: #B9DFF2;
+    --soft-pink: #F6C8D8;
+    --warm-white: #FFFDF9;
+    --cream: #F8F3EE;
+    --soft-blue: #DDEFFA;
+    --text: #4A4650;
+    --muted: #817B86;
+    --glass-bg: rgba(255, 253, 249, 0.6);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: radial-gradient(circle at center, var(--warm-white) 0%, var(--cream) 100%);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.8;
+    min-height: 100vh;
+}
+
+/* Typography */
+.handwritten {
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 1.5rem;
+    color: var(--text);
+}
+
+.handwritten-large {
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 2.5rem;
+    color: var(--soft-pink);
+    margin: 2rem 0;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.05);
+}
+
+/* Utilities */
+.hidden { display: none !important; }
+.opacity-0 { opacity: 0; pointer-events: none; }
+
+/* Music Button */
+.music-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    padding: 10px 20px;
+    border-radius: 30px;
+    color: var(--text);
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: all 0.5s ease;
+}
+.music-btn.playing {
+    animation: pulse 2s infinite;
+}
+
+/* Scenes */
+.scene {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+}
+
+/* Bouquet */
+.bouquet-container {
+    text-align: center;
+    animation: floatBouquet 4s ease-in-out infinite;
+}
+.bouquet-svg {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.05));
+}
+.bouquet-text {
+    font-size: 2rem;
+    color: var(--muted);
+    margin-bottom: 20px;
+}
+
+/* Buttons */
+.elegant-btn, .white-btn {
+    background: var(--soft-blue);
+    color: var(--text);
+    border: none;
+    padding: 12px 35px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    box-shadow: 0 5px 15px rgba(185, 223, 242, 0.4);
+    font-family: 'Cairo', sans-serif;
+}
+.elegant-btn:hover {
+    background: var(--baby-blue);
+    transform: translateY(-2px);
+}
+.white-btn {
+    background: var(--warm-white);
+    border: 1px solid var(--soft-pink);
+    box-shadow: 0 5px 15px rgba(246, 200, 216, 0.3);
+}
+.white-btn:hover {
+    background: var(--soft-pink);
+    color: var(--warm-white);
+}
+
+/* Envelope Scene */
+.envelope-text {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    color: var(--muted);
+    text-align: center;
+}
+.envelope-wrapper {
+    position: relative;
+    width: 320px;
+    height: 220px;
+    margin-bottom: 30px;
+    perspective: 1000px;
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* تأثير التفاعل مع الظرف */
+.envelope-wrapper:hover {
+    transform: scale(1.03);
+    filter: drop-shadow(0 15px 25px rgba(246, 200, 216, 0.4));
+}
+.envelope-wrapper.is-open {
+    cursor: default;
+}
+.envelope-wrapper.is-open:hover {
+    transform: scale(1);
+    filter: none;
+}
+
+.envelope {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: var(--cream);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+.envelope-front {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 110px 160px;
+    border-color: transparent var(--warm-white) var(--warm-white) var(--warm-white);
+    z-index: 3;
+    border-radius: 0 0 10px 10px;
+    pointer-events: none;
+}
+.flap {
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 130px 160px 0 160px;
+    border-color: var(--soft-pink) transparent transparent transparent;
+    z-index: 4;
+    transform-origin: top;
+    transition: transform 1.2s ease-in-out;
+    pointer-events: none;
+}
+.envelope.open .flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+.wax-seal {
+    position: absolute;
+    top: -140px;
+    left: -20px;
+    width: 40px;
+    height: 40px;
+    background: var(--baby-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.letter {
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+    width: 90%;
+    height: 95%;
+    background: var(--warm-white);
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    z-index: 2;
+    transition: all 1.5s ease-in-out;
+    overflow: hidden;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.envelope.open .letter.lifted {
+    transform: translateY(-80px);
+}
+
+/* تعديل الجواب ليفتح بـ Absolute لحل مشكلة التداخل */
+.envelope.open .letter.expanded {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, calc(40vh - 110px));
+    width: 90vw; 
+    max-width: 600px;
+    height: 80vh;
+    z-index: 100;
+    overflow-y: auto;
+    padding: 40px;
+    background: #FFFEFC;
+    border-radius: 15px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+}
+
+.letter-content {
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+.letter.expanded .letter-content {
+    opacity: 1;
+}
+.letter-content p {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    color: var(--text);
+}
+.letter-content .greeting {
+    font-size: 1.8rem;
+    color: var(--soft-pink);
+    margin-bottom: 25px;
+}
+
+/* Scroll Content */
+#scroll-content {
+    padding: 60px 20px;
+}
+.emotional-section, .video-section, .final-section {
+    max-width: 700px;
+    margin: 0 auto 120px auto;
+    text-align: center;
+}
+.soft-title {
+    color: var(--soft-pink);
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+.soft-text {
+    font-size: 1.1rem;
+    color: var(--muted);
+}
+
+/* Video Section */
+.video-container {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    padding: 30px 20px;
+    border-radius: 30px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+}
+.small-label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--baby-blue);
+    margin-bottom: 5px;
+}
+.video-title {
+    color: var(--text);
+    margin-bottom: 25px;
+    font-weight: 400;
+}
+.video-wrapper video {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+.video-caption {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: var(--muted);
+    font-style: italic;
+}
+
+/* Transition Text */
+.transition-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+.stagger-text {
+    font-size: 1.5rem;
+    color: var(--text);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1s ease;
+}
+.stagger-text.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Final Message */
+.hidden-message {
+    margin-top: 30px;
+    font-size: 1.2rem;
+    color: var(--muted);
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+.hidden-message.visible {
+    opacity: 1;
+}
+
+/* Particles */
+#particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+}
+.petal {
+    position: absolute;
+    background: var(--soft-pink);
+    border-radius: 100% 0 100% 0;
+    opacity: 0.6;
+    animation: fall linear infinite;
+}
+
+/* Animations */
+@keyframes floatBouquet {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(185, 223, 242, 0.4); }
+    50% { box-shadow: 0 0 0 15px rgba(185, 223, 242, 0); }
+}
+@keyframes fall {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.6; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1.5s ease-out;
+}
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .envelope-wrapper { width: 280px; height: 190px; }
+    .envelope-front { border-width: 95px 140px; }
+    .flap { border-width: 110px 140px 0 140px; }
+    
+    /* الجواب في الموبايل */
+    .envelope.open .letter.expanded { 
+        width: 95vw; 
+        padding: 25px; 
+        height: 85vh; 
+        transform: translate(-50%, calc(42.5vh - 95px));
+    }
+    
+    .handwritten-large { font-size: 2rem; }
+}

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ليكِ انتي ❤️</title>
+    <!-- استدعاء خطوط أنيقة من جوجل -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- موسيقى الخلفية -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="assets/bg-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="musicToggle" class="music-btn" aria-label="تشغيل الموسيقى">🎵 شغلي الموسيقى</button>
+
+    <!-- الجسيمات المتطايرة (Petals) -->
+    <div id="particles-container"></div>
+
+    <!-- المشهد الأول: البوكيه -->
+    <section id="scene-bouquet" class="scene active">
+        <div class="bouquet-container">
+            <!-- رسمة البوكيه (SVG أنيق) -->
+            <svg class="bouquet-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <path d="M100 180 C90 120, 70 100, 50 80 C60 70, 80 80, 100 110 C120 80, 140 70, 150 80 C130 100, 110 120, 100 180 Z" fill="#817B86" opacity="0.5"/>
+                <circle cx="70" cy="70" r="20" fill="var(--soft-pink)" opacity="0.9"/>
+                <circle cx="130" cy="70" r="20" fill="var(--baby-blue)" opacity="0.9"/>
+                <circle cx="100" cy="50" r="25" fill="#FFFDF9" stroke="var(--soft-pink)" stroke-width="2"/>
+                <circle cx="100" cy="90" r="18" fill="var(--soft-blue)" opacity="0.8"/>
+                <path d="M100 140 Q110 160 100 180 Q90 160 100 140" fill="#B9DFF2"/>
+            </svg>
+            <h1 class="bouquet-text">ليكِ انتي ❤️</h1>
+            <button id="openBouquetBtn" class="elegant-btn">افتحيها</button>
+        </div>
+    </section>
+
+    <!-- المشهد الثاني: الظرف والجواب -->
+    <section id="scene-envelope" class="scene hidden">
+        <div class="envelope-text">في حاجة صغيرة جوا.. اضغطي على الظرف عشان تفتحيه</div>
+        <div class="envelope-wrapper" id="envelopeWrapper">
+            <div class="envelope">
+                <div class="flap">
+                    <div class="wax-seal">❤️</div>
+                </div>
+                <div class="envelope-body"></div>
+                <div class="letter" id="theLetter">
+                    <div class="letter-content">
+                        <p class="handwritten greeting">حبيبتي كريمة،</p>
+                        <p>أنا عارف إن أحياناً لما بغير، طريقتي في التعبير عن ده بتكون باردة شوية، وبدل ما أحسسك بالحب والأمان، بخلّيكي تتوجعي أو تحسي إني ببعد عنك.</p>
+                        <p>أنا فاهم كويس إن اللي بيوجع مش الغيرة نفسها، لكن طريقتي في التعامل معاها.</p>
+                        <p>وامبارح، لما كان عندنا فرصة نقعد سوا ونقضي وقت مع بعض، وأنا روحت قعدت مع صحابي. بس. أنا مقدر جداً ومستوعب ليه ده خلاكي تحسي إني مش عايز أقضي وقت معاكي بس احنا امبارح سواء انا او انتي كنا مقضيين اليوم مع صحابنا وانا عارف انك مضابقه من ده.</p>
+                        <p>أنا مش بكتب الكلام ده عشان أبرر اللي حصل.. أنا بس عايزك تعرفي إني حاسس بيكي وفاهم زعلك. إنتي تستهلي دايماً تحسي إن وجودك فارق معايا. أنا بحب قعدتنا سوا، وبحب كلامنا، وبحب كل التفاصيل الصغيرة اللي بينا.</p>
+                        <p>وآسف إن أحياناً طريقتي في التعامل مع مشاعري بتوصلك عكس اللي جوايا بجد.</p>
+                        <p>أنا مش عايز غيرتي تكون حاجة بتأذيكي. وعايز أتعلم إزاي أعبر عن اللي حاسه من غير ما أخليكي تحسي بالوحدة أو إني ببعدك.</p>
+                        <p>امبارح، ياريتني كنت اخترت أفضل معاكي ونقضي الوقت ده سوا.</p>
+                        <p>أنا مش بقول كده عشان بس أصالحك وتنسي الزعل.. أنا بقول كده لأني بجد فهمت دلوقتي إيه اللي وجعك.</p>
+                    </div>
+                </div>
+                <div class="envelope-front"></div>
+            </div>
+        </div>
+        <div class="envelope-actions">
+            <button id="readLetterBtn" class="elegant-btn hidden">اقري</button>
+        </div>
+    </section>
+
+    <!-- المشهد الثالث: المحتوى العاطفي (يظهر بالتمرير) -->
+    <div id="scroll-content" class="hidden">
+        
+        <section class="emotional-section scroll-reveal">
+            <h2 class="soft-title">انا مش عايزك تشوفي مني البرود وانت جوايا كل الحب ده</h2>
+            <p class="soft-text">أحياناً المشاعر بتكون أكبر من طريقتنا في التعبير عنها، بس ده مش معناه إنها مش موجودة. كل اللي جوايا ليكي هو حب وخوف عليكي، ومحتاج أتعلم إزاي أوصلك ده دايماً بالطريقة اللي تطمنك.</p>
+        </section>
+
+        <!-- قسم الفيديو -->
+        <section class="video-section scroll-reveal">
+            <div class="video-container">
+                <span class="small-label">حاجة صغيرة عملتها ليكي</span>
+                <h2 class="video-title">صورتك وهي بتترسم</h2>
+                <div class="video-wrapper">
+                    <video controls playsinline>
+                        <source src="assets/drawing-video.mp4" type="video/mp4">
+                        متصفحك لا يدعم تشغيل الفيديو.
+                    </video>
+                </div>
+                <p class="video-caption">يمكن الصورة بتترسم قدامي<br>بس الحقيقة ان صورتك جوا قلبي مش محتاجة رسم</p>
+            </div>
+        </section>
+
+        <!-- الانتقال العاطفي -->
+        <section class="transition-section">
+            <div class="stagger-text fade-text-1">انا مقدر زعلك</div>
+            <div class="stagger-text fade-text-2">ومش مستني منك تنسي بسرعة</div>
+            <div class="stagger-text fade-text-3">انا بس عايزك تعرفي اني فهمت</div>
+        </section>
+
+        <!-- المشهد النهائي -->
+        <section class="final-section scroll-reveal">
+            <h3 class="final-text">المهم عندي انك تكوني حاسة بالأمان معايا</h3>
+            <h3 class="final-text">وانك تعرفي ان وجودك في حياتي حاجة انا مقدرها بجد</h3>
+            
+            <div class="handwritten-large">انا بحبك<br>ومش عايز زعلك يكون بينا</div>
+            
+            <button id="finalBtn" class="white-btn">نقعد سوا؟</button>
+            <div id="finalMessage" class="hidden-message">تعالي نقعد سوا ونخلي كل حاجة أهدى ❤️</div>
+        </section>
+        
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
